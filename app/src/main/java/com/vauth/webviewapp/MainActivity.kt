@@ -222,26 +222,26 @@ class MainActivity : AppCompatActivity() {
             val buttonOffset = fabSize + fabButtonSpacing
             
             // GitHub button - bottom left (first button)
-            fabGithub = FloatingActionButton(this).apply {
-                layoutParams = FrameLayout.LayoutParams(
-                    FrameLayout.LayoutParams.WRAP_CONTENT,
-                    FrameLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    gravity = Gravity.BOTTOM or Gravity.START
-                    setMargins(fabMargin, 0, 0, fabMargin)
-                }
-                setImageResource(R.drawable.ic_github)
-                backgroundTintList = ContextCompat.getColorStateList(context, R.color.fabGithub)
-                setOnClickListener {
-                    try {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL))
-                        startActivity(intent)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error opening GitHub URL", e)
-                        Toast.makeText(this@MainActivity, "Cannot open browser", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+          //  fabGithub = FloatingActionButton(this).apply {
+         //       layoutParams = FrameLayout.LayoutParams(
+             //       FrameLayout.LayoutParams.WRAP_CONTENT,
+         //           FrameLayout.LayoutParams.WRAP_CONTENT
+          //      ).apply {
+            //        gravity = Gravity.BOTTOM or Gravity.START
+           //         setMargins(fabMargin, 0, 0, fabMargin)
+       //         }
+          //      setImageResource(R.drawable.ic_github)
+        //        backgroundTintList = ContextCompat.getColorStateList(context, R.color.fabGithub)
+         //       setOnClickListener {
+            //        try {
+       //                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL))
+             //           startActivity(intent)
+            //        } catch (e: Exception) {
+          //              Log.e(TAG, "Error opening GitHub URL", e)
+          //              Toast.makeText(this@MainActivity, "Cannot open browser", Toast.LENGTH_SHORT).show()
+           //         }
+      //          }
+      //      }
             
             // Back button - above GitHub button on the left
             fabBack = FloatingActionButton(this).apply {
