@@ -510,9 +510,7 @@ class MainActivity : AppCompatActivity() {
                     filePathCallback?.onReceiveValue(null)
                     return false
                 }
-            }
-
-            //new add
+                    //new add
 
 
             // 🔽 HANDLE FILE DOWNLOADS (PDF, ZIP, APK, etc.)
@@ -550,6 +548,9 @@ webView?.setDownloadListener { url, userAgent, contentDisposition, mimeType, con
         Toast.makeText(this, "Download failed", Toast.LENGTH_SHORT).show()
     }
 }
+            }
+
+        
 
             
             // Handle geolocation permission
