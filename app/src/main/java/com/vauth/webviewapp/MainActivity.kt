@@ -22,6 +22,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+//new add
+import android.app.DownloadManager
+import android.content.Context
+import android.os.Environment
+import android.webkit.URLUtil
+
 
 /**
  * WebView app with floating navigation buttons.
@@ -505,6 +511,46 @@ class MainActivity : AppCompatActivity() {
                     return false
                 }
             }
+
+            //new add
+
+
+            // 🔽 HANDLE FILE DOWNLOADS (PDF, ZIP, APK, etc.)
+webView?.setDownloadListener { url, userAgent, contentDisposition, mimeType, contentLength ->
+    try {
+        val request = DownloadManager.Request(Uri.parse(url))
+
+        request.setMimeType(mimeType)
+
+        val cookies = CookieManager.getInstance().getCookie(url)
+        request.addRequestHeader("cookie", cookies)
+        request.addRequestHeader("User-Agent", userAgent)
+
+        val fileName = URLUtil.guessFileName(url, contentDisposition, mimeType)
+        request.setTitle(fileName)
+        request.setDescription("Downloading file...")
+
+        request.setNotificationVisibility(
+            DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+        )
+
+        request.setDestinationInExternalPublicDir(
+            Environment.DIRECTORY_DOWNLOADS,
+            fileName
+        )
+
+        val downloadManager =
+            getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
+
+        Toast.makeText(this, "Downloading $fileName", Toast.LENGTH_SHORT).show()
+
+    } catch (e: Exception) {
+        Log.e(TAG, "Download failed", e)
+        Toast.makeText(this, "Download failed", Toast.LENGTH_SHORT).show()
+    }
+}
+
             
             // Handle geolocation permission
             override fun onGeolocationPermissionsShowPrompt(
